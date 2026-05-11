@@ -1,7 +1,57 @@
-h1 {
-    font-weight: bold;
+@font-face {
+    font-family: 'Inter';
+    src: url(fonts/Inter/Inter_28pt-Medium.ttf);
 }
 
-p {
-    font-weight: 100;
+@font-face {
+    font-family: 'Inter Black';
+    src: url(fonts/Inter/Inter_28pt-Black.ttf);
+}
+
+.inicioTexto {
+    font-family: Inter;
+    color: white;
+    font-size: 17px; 
+    margin: -5px; 
+    margin-top: 5px;
+}
+
+.navBarTitulo {
+    font-size: 50px; 
+    margin-bottom: -20px; 
+    margin-top: -20px;
+    color: white;
+    font-family: Inter;
+    position: absolute; 
+    text-align: center;
+}
+
+.navBar {
+    background-color: #042771; 
+    padding: 0.5%;
+    padding-left: 25px;
+    align-items: center; 
+    display: flex;
+}
+
+.headerImg {
+    margin: -10px; 
+    margin-left: 25px;
+    height: 45px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.conteudoTitulo {
+    font-family: Inter Black;
+    color: black;
+    font-size: 50px;
+}
+
+.conteudoTexto {
+    font-family: Inter;
+    color: black;
+    font-size: 36px;
 }

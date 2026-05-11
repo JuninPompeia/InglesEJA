@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header.html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Page</title>
 </head>
 <body>
-    <p style="text-align: justify">1. </p>
+
+    <!-- NavBar -->
+    <div class="navBar">
+        <nav>
+            <a href="PaginaInicial.html">
+                <div>
+                    <img src="images/house-icon.png" class="headerImg">
+                    <p class="inicioTexto">
+                        Página Inicial
+                    </p>
+                </div>
+            </a>
+        </nav>
+
+        <p class="navBarTitulo" style="left: 50%;"></p>
+    </div>
+
+    <div style="display: flex; padding-top: 50px;">
+        <div style="width: 50%; text-align: center;">
+            <h1 class="conteudoTitulo">Matérias</h1>
+            <p class="conteudoTexto" onclick="window.location.href='PaginaInicial.html'">1. Pronouns (pronomes)</p>
+        </div>
+        <div style="width: 50%; text-align: center;">
+            <h1 class="conteudoTitulo">Questionários</h1>
+            <p class="conteudoTexto" onclick="window.location.href='PaginaInicial.html'">1. Pronouns (pronomes)</p>
+        </div>
+    </div>
 </body>
 </html>
