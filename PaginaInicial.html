@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="header.html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Page</title>
@@ -11,28 +10,28 @@
 
     <!-- NavBar -->
     <div class="navBar">
+        <p class="navBarTitulo"></p>
         <nav>
             <a href="PaginaInicial.html">
                 <div>
-                    <img src="images/house-icon.png" class="headerImg">
+                    <img src="images/house-icon.png" class="navBarIcon">
                     <p class="inicioTexto">
                         Página Inicial
                     </p>
                 </div>
             </a>
         </nav>
-
-        <p class="navBarTitulo" style="left: 50%;"></p>
     </div>
 
-    <div style="display: flex; padding-top: 50px;">
+    <!-- Colunas Matéria e Questionário -->
+    <div style="display: flex; padding-top: 50px">
         <div style="width: 50%; text-align: center;">
             <h1 class="conteudoTitulo">Matérias</h1>
-            <p class="conteudoTexto" onclick="window.location.href='PaginaInicial.html'">1. Pronouns (pronomes)</p>
+            <p class="conteudoSubTitulo" onclick="window.location.href='TelaMateria.html'" style="display: inline-block">1. Placeholder</p>
         </div>
         <div style="width: 50%; text-align: center;">
             <h1 class="conteudoTitulo">Questionários</h1>
-            <p class="conteudoTexto" onclick="window.location.href='PaginaInicial.html'">1. Pronouns (pronomes)</p>
+            <p class="conteudoSubTitulo" onclick="window.location.href='PaginaInicial.html'" style="display: inline-block">1. Placeholder</p>
         </div>
     </div>
 </body>

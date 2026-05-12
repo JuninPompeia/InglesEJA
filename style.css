@@ -8,6 +8,16 @@
     src: url(fonts/Inter/Inter_28pt-Black.ttf);
 }
 
+@font-face {
+    font-family: 'Inter Light';
+    src: url(fonts/Inter/Inter_28pt-Regular.ttf);
+}
+
+body {
+    margin: 0;
+    padding: 0
+}
+
 .inicioTexto {
     font-family: Inter;
     color: white;
@@ -17,24 +27,26 @@
 }
 
 .navBarTitulo {
-    font-size: 50px; 
-    margin-bottom: -20px; 
-    margin-top: -20px;
+    font-size: 50px;
+    margin: 0px;
     color: white;
     font-family: Inter;
-    position: absolute; 
     text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .navBar {
-    background-color: #042771; 
+    background-color: #042771;
     padding: 0.5%;
     padding-left: 25px;
-    align-items: center; 
+    align-items: center;
     display: flex;
+    position: relative;
 }
 
-.headerImg {
+.navBarIcon {
     margin: -10px; 
     margin-left: 25px;
     height: 45px;
@@ -50,8 +62,20 @@ a {
     font-size: 50px;
 }
 
+.conteudoSubTitulo {
+    font-family: Inter;
+    color: black;
+    font-size: 40px;
+}
+
 .conteudoTexto {
     font-family: Inter;
     color: black;
-    font-size: 36px;
+    font-size: 30px;
+}
+
+.conteudoImagem {
+    display: block;
+    margin: auto;
+    max-width: 50%;
 }
