@@ -1,0 +1,6 @@
+{
+    "questoes": [
+        {"pergunta":"Pergunta 1", "respostas":["resposta 1", "resposta 2", "reposta 3", "resposta 4"]},
+        {"pergunta":"Pergunta 2", "respostas":["resposta 1", "resposta 2", "reposta 3", "resposta 4"]}
+    ]
+}

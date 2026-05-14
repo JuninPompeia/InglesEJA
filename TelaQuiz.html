@@ -1,11 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
+    <link href="scripts.js">
+    <link href="quiz.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Questionário Placeholder</title>
 </head>
 <body>
-    
+    <!-- NavBar -->
+    <div class="navBar">
+        <nav>
+            <a href="PaginaInicial.html">
+                <div>
+                    <img src="images/house-icon.png" class="navBarIcon">
+                    <p class="inicioTexto">
+                        Página Inicial
+                    </p>
+                </div>
+            </a>
+        </nav>
+        <p class="navBarTitulo">Título</p>
+    </div>
+
+    <div style="text-align: center; margin-left: 20%; margin-right: 20%">
+        <p class="quizPergunta" id="pergunta">Pergunta aqui</p>
+        <div style="display: grid; gap: 20% 0%; grid-template-columns: repeat(2, 1fr); place-items: center; width: 100%">
+            <div class="quizBox">
+                    <p class="quizResposta" id="1">Resposta</p>
+            </div>
+
+            <div class="quizBox">
+                    <p class="quizResposta" id="2">Resposta</p>
+            </div>
+
+            <div class="quizBox">
+                    <p class="quizResposta" id="3">Resposta</p>
+            </div>
+
+            <div class="quizBox">
+                    <p class="quizResposta" id="4">Resposta</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ordemQuestoes() {
+            const ordem = [0,0,0,0];
+            for (let i = 0; i < 4; i++){
+                let novoValor;
+                do {
+                    novoValor = Math.trunc(Math.random() * (4 - 1 + 1)) + 1;
+                } while (novoValor == ordem[0] || novoValor == ordem[1] || novoValor == ordem[2] || novoValor == ordem[3]);
+                ordem[i] = novoValor;
+            }
+            return ordem;
+        }
+
+        let ordem = ordemQuestoes();
+        let text = `{"questoes":[
+            {"pergunta":"Pergunta 1","respostas":["resposta 1","resposta 2","reposta 3","resposta 4"]},
+            {"pergunta":"Pergunta 2","respostas":["resposta 1","resposta 2","reposta 3","resposta 4"]}
+        ]}`;
+        let questao = JSON.parse(text);
+
+        for (let i = 0; i < 4; i++){
+            document.getElementById(i+1).innerHTML = questao.questoes[0].respostas[ordem[i]-1];
+        }
+
+        document.getElementById("pergunta").innerHTML = questao.questoes[0].pergunta;
+    </script>
 </body>
 </html>
