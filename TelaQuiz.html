@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <link href="scripts.js">
     <link href="quiz.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,40 +27,29 @@
         <p class="quizPergunta" id="pergunta">Pergunta aqui</p>
         <div style="display: grid; gap: 20% 0%; grid-template-columns: repeat(2, 1fr); place-items: center; width: 100%">
             <div class="quizBox">
-                    <p class="quizResposta" id="1">Resposta</p>
+                    <p class="quizResposta" id="1" data-tooltip="Explicação 1">Resposta</p>
             </div>
 
             <div class="quizBox">
-                    <p class="quizResposta" id="2">Resposta</p>
+                    <p class="quizResposta" id="2" data-tooltip="Explicação 2">Resposta</p>
             </div>
 
             <div class="quizBox">
-                    <p class="quizResposta" id="3">Resposta</p>
+                    <p class="quizResposta" id="3" data-tooltip="Explicação 3">Resposta</p>
             </div>
 
             <div class="quizBox">
-                    <p class="quizResposta" id="4">Resposta</p>
+                    <p class="quizResposta" id="4" data-tooltip="Explicação 4">Resposta</p>
             </div>
         </div>
     </div>
 
+    <script src="scripts.js"></script>
     <script>
-        function ordemQuestoes() {
-            const ordem = [0,0,0,0];
-            for (let i = 0; i < 4; i++){
-                let novoValor;
-                do {
-                    novoValor = Math.trunc(Math.random() * (4 - 1 + 1)) + 1;
-                } while (novoValor == ordem[0] || novoValor == ordem[1] || novoValor == ordem[2] || novoValor == ordem[3]);
-                ordem[i] = novoValor;
-            }
-            return ordem;
-        }
-
         let ordem = ordemQuestoes();
         let text = `{"questoes":[
-            {"pergunta":"Pergunta 1","respostas":["resposta 1","resposta 2","reposta 3","resposta 4"]},
-            {"pergunta":"Pergunta 2","respostas":["resposta 1","resposta 2","reposta 3","resposta 4"]}
+            {"pergunta":"Pergunta 1","respostas":["resposta 1","resposta 2","resposta 3","resposta 4"]},
+            {"pergunta":"Pergunta 2","respostas":["resposta 1","resposta 2","resposta 3","resposta 4"]}
         ]}`;
         let questao = JSON.parse(text);
 
@@ -71,5 +59,7 @@
 
         document.getElementById("pergunta").innerHTML = questao.questoes[0].pergunta;
     </script>
+
+    <div class="tooltip" id="tooltip">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget velit sed turpis tristique suscipit. Nulla porttitor sem non nisl dignissim egestas. Cras pharetra lorem erat, a vehicula dolor cursus at. Vestibulum ut sapien est. Integer mollis tortor sit amet magna commodo rhoncus. Donec pharetra aliquet dapibus. Sed vel eros nec purus dignissim vulputate. Cras dictum pharetra leo, eget pharetra ante ornare sit amet. Vestibulum pulvinar, lectus viverra aliquet tristique, metus tellus dignissim nisl, sed finibus dolor leo a nulla. Curabitur nec posuere arcu. </div>
 </body>
 </html>

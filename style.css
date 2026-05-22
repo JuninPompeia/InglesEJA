@@ -107,3 +107,35 @@ a {
     align-items: center; 
     justify-content: center;
 }
+
+.tooltip {
+  width: clamp(220px, 30vw, 320px);
+  height: clamp(100px, 18vw, 140px);
+
+  padding: 16px;
+  box-sizing: border-box;
+  
+  background: #222;
+  color: white;
+  border-radius: 10px;
+
+  position: absolute;
+  z-index: 1000;
+
+  overflow-y: auto;
+  /* hidden by default */
+  display: none;
+  
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  font-size: 14px;
+  font-family: Inter;
+  line-height: 1.4;
+}
+
+.tooltip.show {
+  display: block;
+}
+
+.word {
+  cursor: pointer;
+}
