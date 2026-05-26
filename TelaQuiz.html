@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <link href="quiz.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questionário Placeholder</title>
@@ -23,41 +22,35 @@
         <p class="navBarTitulo">Título</p>
     </div>
 
+    <div style="text-align: center">
+        <p class="contador" id="contador">10 / 10</p>
+    </div>
+
     <div style="text-align: center; margin-left: 20%; margin-right: 20%">
         <p class="quizPergunta" id="pergunta">Pergunta aqui</p>
         <div style="display: grid; gap: 20% 0%; grid-template-columns: repeat(2, 1fr); place-items: center; width: 100%">
             <div class="quizBox">
-                    <p class="quizResposta" id="1" data-tooltip="Explicação 1">Resposta</p>
+                    <p class="quizResposta" id="resposta1">Resposta</p>
             </div>
 
             <div class="quizBox">
-                    <p class="quizResposta" id="2" data-tooltip="Explicação 2">Resposta</p>
+                    <p class="quizResposta" id="resposta2">Resposta</p>
             </div>
 
             <div class="quizBox">
-                    <p class="quizResposta" id="3" data-tooltip="Explicação 3">Resposta</p>
+                    <p class="quizResposta" id="resposta3">Resposta</p>
             </div>
 
             <div class="quizBox">
-                    <p class="quizResposta" id="4" data-tooltip="Explicação 4">Resposta</p>
+                    <p class="quizResposta" id="resposta4">Resposta</p>
             </div>
         </div>
     </div>
 
     <script src="scripts.js"></script>
     <script>
-        let ordem = ordemQuestoes();
-        let text = `{"questoes":[
-            {"pergunta":"Pergunta 1","respostas":["resposta 1","resposta 2","resposta 3","resposta 4"]},
-            {"pergunta":"Pergunta 2","respostas":["resposta 1","resposta 2","resposta 3","resposta 4"]}
-        ]}`;
-        let questao = JSON.parse(text);
-
-        for (let i = 0; i < 4; i++){
-            document.getElementById(i+1).innerHTML = questao.questoes[0].respostas[ordem[i]-1];
-        }
-
-        document.getElementById("pergunta").innerHTML = questao.questoes[0].pergunta;
+        coutnQuiz = 0; 
+        carregarQuiz(coutnQuiz);
     </script>
 
     <div class="tooltip" id="tooltip">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget velit sed turpis tristique suscipit. Nulla porttitor sem non nisl dignissim egestas. Cras pharetra lorem erat, a vehicula dolor cursus at. Vestibulum ut sapien est. Integer mollis tortor sit amet magna commodo rhoncus. Donec pharetra aliquet dapibus. Sed vel eros nec purus dignissim vulputate. Cras dictum pharetra leo, eget pharetra ante ornare sit amet. Vestibulum pulvinar, lectus viverra aliquet tristique, metus tellus dignissim nisl, sed finibus dolor leo a nulla. Curabitur nec posuere arcu. </div>

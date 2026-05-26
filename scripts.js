@@ -1,17 +1,37 @@
-function ordemQuestoes() {
-    const ordem = [0,0,0,0];
+let acertos;
+let questoes = [
+    {"pergunta":"Complete a frase:<br> I ___ a student.", "respostas":["am", "is", "are", "be"]},
+    {"pergunta":"Complete a frase:<br> She ___ my friend.", "respostas":["is", "am", "are", "be"]},
+    {"pergunta":"Complete a frase:<br> They ___ at school.", "respostas":["are", "be", "is", "am"]},
+    {"pergunta":"Complete a frase:<br> He ___ very happy.", "respostas":["are", "is", "be", "am"]},
+    {"pergunta":"Complete a frase:<br> We ___ from Brazil.", "respostas":["is", "are", "am", "be"]},
+    {"pergunta":"Complete a frase:<br> You ___ a good teacher.", "respostas":["are", "be", "am", "si"]}
+];
+
+let indicesQuizzes = questoes.map((_, i) => i);
+let ordemQuizzes = embaralhar(indicesQuizzes);
+
+function carregarQuiz(countQuiz) {
+    let ordemRespostas = embaralhar([0, 1, 2, 3]);
+
+    document.getElementById("contador").innerHTML = `${countQuiz+1} / ${questoes.length}`;
+
     for (let i = 0; i < 4; i++){
-        let novoValor;
-        do {
-            novoValor = Math.trunc(Math.random() * (4 - 1 + 1)) + 1;
-        } while (novoValor == ordem[0] || novoValor == ordem[1] || novoValor == ordem[2] || novoValor == ordem[3]);
-        ordem[i] = novoValor;
+        document.getElementById(`resposta${i+1}`).innerHTML = questoes[ordemQuizzes[countQuiz]].respostas[ordemRespostas[i]];
     }
-    return ordem;
+
+    document.getElementById("pergunta").innerHTML = questoes[ordemQuizzes[countQuiz]].pergunta;
+}
+
+function embaralhar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
     const tooltip = document.getElementById("tooltip");
     const words = document.querySelectorAll(".word");
     const respostas = document.querySelectorAll(".quizResposta");

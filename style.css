@@ -85,6 +85,15 @@ a {
     max-width: 50%;
 }
 
+.contador {
+    font-family: Inter Bold;
+    color: #123072;
+    font-size: 50px;
+    margin: -5px; 
+    margin-top: 7px;
+    margin-bottom: -50px;
+}
+
 .quizPergunta {
     font-family: Inter Bold;
     color: black;
