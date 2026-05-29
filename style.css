@@ -35,7 +35,7 @@ body {
     font-size: 50px;
     margin: 0px;
     color: white;
-    font-family: Inter;
+    font-family: Inter Bold;
     text-align: center;
     position: absolute;
     left: 50%;
@@ -88,10 +88,14 @@ a {
 .contador {
     font-family: Inter Bold;
     color: #123072;
-    font-size: 50px;
-    margin: -5px; 
-    margin-top: 7px;
-    margin-bottom: -50px;
+    font-size: clamp(36px, 8vw, 70px);
+
+    position: fixed;
+    bottom: 20px;
+    right: 2%;
+    transform: translateX(-50%);
+
+    margin: 0;
 }
 
 .quizPergunta {
@@ -115,6 +119,13 @@ a {
     display: flex; 
     align-items: center; 
     justify-content: center;
+
+    transition: 0.2s;
+}
+
+.quizBox.clicado {
+    transform: scale(0.95);
+    background-color: #2f4d8f;
 }
 
 .tooltip {

@@ -1,12 +1,24 @@
-let acertos;
+let respostas = {
+    acertos: [],
+    erros: []
+};
+
 let questoes = [
     {"pergunta":"Complete a frase:<br> I ___ a student.", "respostas":["am", "is", "are", "be"]},
     {"pergunta":"Complete a frase:<br> She ___ my friend.", "respostas":["is", "am", "are", "be"]},
     {"pergunta":"Complete a frase:<br> They ___ at school.", "respostas":["are", "be", "is", "am"]},
     {"pergunta":"Complete a frase:<br> He ___ very happy.", "respostas":["are", "is", "be", "am"]},
     {"pergunta":"Complete a frase:<br> We ___ from Brazil.", "respostas":["is", "are", "am", "be"]},
-    {"pergunta":"Complete a frase:<br> You ___ a good teacher.", "respostas":["are", "be", "am", "si"]}
+    {"pergunta":"Complete a frase:<br> You ___ a good teacher.", "respostas":["are", "be", "am", "is"]}
 ];
+
+function embaralhar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 let indicesQuizzes = questoes.map((_, i) => i);
 let ordemQuizzes = embaralhar(indicesQuizzes);
@@ -23,12 +35,19 @@ function carregarQuiz(countQuiz) {
     document.getElementById("pergunta").innerHTML = questoes[ordemQuizzes[countQuiz]].pergunta;
 }
 
-function embaralhar(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+function enviarResposta(resposta){
+    if (resposta == questoes[ordemQuizzes[countQuiz]].respostas[0]){
+        respostas.acertos.push(ordemQuizzes[countQuiz]);
+    } else {
+        respostas.erros.push(ordemQuizzes[countQuiz]);
     }
-    return array;
+
+    if (countQuiz < questoes.length-1){
+        countQuiz++;
+        carregarQuiz(countQuiz);
+    } else {
+        window.location.href = "TelaResultado.html";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,24 +58,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // WORDS (click tooltip)
     words.forEach(word => {
         word.addEventListener("click", (e) => {
-            const rect = word.getBoundingClientRect();
+            const rect = resposta.getBoundingClientRect();
 
             tooltip.classList.add("show");
 
             const tooltipWidth = tooltip.offsetWidth;
+            const tooltipHeight = tooltip.offsetHeight;
 
             const wordCenter = rect.left + rect.width / 2;
 
-            let left = wordCenter + window.scrollX - (tooltipWidth / 2);
+            let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
 
-            // prevent going off-screen
-            const minLeft = 10;
-            const maxLeft = window.innerWidth - tooltipWidth - 10;
+            left = Math.max(10, Math.min(left, window.innerWidth - tooltipWidth - 10));
 
-            left = Math.max(minLeft, Math.min(left, maxLeft));
+            let top = rect.bottom + 8;
+
+            
+            if (top + tooltipHeight > window.innerHeight) {
+                top = rect.top - tooltipHeight - 8;
+            }
 
             tooltip.style.left = `${left}px`;
-            tooltip.style.top = `${rect.bottom + window.scrollY + 8}px`;
+            tooltip.style.top = `${top + window.scrollY}px`;
         });
     });
 
@@ -67,34 +90,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // RESPOSTAS (hover tooltip)
+    // RESPOSTAS
     respostas.forEach(resposta => {
-
+        // Hover: Show tooltip
         resposta.addEventListener("mouseenter", () => {
             const rect = resposta.getBoundingClientRect();
 
             tooltip.classList.add("show");
 
             const tooltipWidth = tooltip.offsetWidth;
+            const tooltipHeight = tooltip.offsetHeight;
 
             const wordCenter = rect.left + rect.width / 2;
 
-            let left = wordCenter + window.scrollX - (tooltipWidth / 2);
+            let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
 
-            // prevent going off-screen
-            const minLeft = 10;
-            const maxLeft = window.innerWidth - tooltipWidth - 10;
+            left = Math.max(10, Math.min(left, window.innerWidth - tooltipWidth - 10));
 
-            left = Math.max(minLeft, Math.min(left, maxLeft));
+            let top = rect.bottom + 8;
+
+            
+            if (top + tooltipHeight > window.innerHeight) {
+                top = rect.top - tooltipHeight - 8;
+            }
 
             tooltip.style.left = `${left}px`;
-            tooltip.style.top = `${rect.bottom + window.scrollY + 8}px`;
+            tooltip.style.top = `${top + window.scrollY}px`;
         });
 
+        // Exit: Hide tooltip
         resposta.addEventListener("mouseleave", () => {
             tooltip.classList.remove("show");
         });
-
     });
 
+    const boxes = document.querySelectorAll(".quizBox");
+    boxes.forEach(box => {
+        box.addEventListener("click", () => {
+            const resposta = box.querySelector(".quizResposta").innerHTML;
+            box.classList.add("clicado");
+            setTimeout(() => {
+                box.classList.remove("clicado");
+                enviarResposta(resposta.innerHTML);
+            }, 200);
+        });
+    });
 });
