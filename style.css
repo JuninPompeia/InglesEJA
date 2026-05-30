@@ -128,6 +128,18 @@ a {
     background-color: #2f4d8f;
 }
 
+.resultado {
+    font-family: Inter;
+    color: black;
+    font-size: 60px;
+}
+
+.resultadoScore {
+    font-family: Inter Bold;
+    color: black;
+    font-size: 80px;
+}
+
 .tooltip {
   width: clamp(220px, 30vw, 320px);
   height: clamp(100px, 18vw, 140px);

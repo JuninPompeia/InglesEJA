@@ -22,6 +22,39 @@
         <p class="navBarTitulo">Título</p>
     </div>
 
-    <div></div>
+    <div style="text-align: center; margin-top: -30px;">
+        <p class="resultado">Resultado:</p>
+        <p class="resultadoScore" id="score" style="margin-top: -55px">X / X</p>
+
+        <p class="quizPergunta" id="mensagem" style="margin-top: -45px;"> Lorem ipsum dolor sit at met</p>
+
+        <!-- Colunas -->
+        <div style="display: flex; margin-top: -20px;">
+            <div style="width: 50%; text-align: center;">
+                <h1 class="conteudoTitulo">Acertos</h1>
+                <div class="conteudoSubTitulo" id="listaAcertos"></div>
+            </div>
+            <div style="width: 50%; text-align: center;">
+                <h1 class="conteudoTitulo">Erros</h1>
+                <div class="conteudoSubTitulo" id="listaErros"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        const acertos = params.get("acertos") ? params.get("acertos").split(",") : [];
+        const erros = params.get("erros") ? params.get("erros").split(",") : [];
+
+        document.getElementById("score").innerHTML = `${acertos.length} / ${acertos.length + erros.length}`;
+
+        if (acertos.length >= erros.length){
+            document.getElementById("mensagem").innerHTML = 'Parabéns, é assim que se faz!';
+        } else {
+            document.getElementById("mensagem").innerHTML = 'Você está quase lá, não desista!';
+        }
+    </script>
 </body>
 </html>

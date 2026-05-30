@@ -1,16 +1,19 @@
 let respostas = {
     acertos: [],
-    erros: []
+    erros: [],
+    opcaoErrada: []
 };
 
 let questoes = [
     {"pergunta":"Complete a frase:<br> I ___ a student.", "respostas":["am", "is", "are", "be"]},
     {"pergunta":"Complete a frase:<br> She ___ my friend.", "respostas":["is", "am", "are", "be"]},
     {"pergunta":"Complete a frase:<br> They ___ at school.", "respostas":["are", "be", "is", "am"]},
-    {"pergunta":"Complete a frase:<br> He ___ very happy.", "respostas":["are", "is", "be", "am"]},
-    {"pergunta":"Complete a frase:<br> We ___ from Brazil.", "respostas":["is", "are", "am", "be"]},
+    {"pergunta":"Complete a frase:<br> He ___ very happy.", "respostas":["is", "are", "be", "am"]},
+    {"pergunta":"Complete a frase:<br> We ___ from Brazil.", "respostas":["are", "is", "am", "be"]},
     {"pergunta":"Complete a frase:<br> You ___ a good teacher.", "respostas":["are", "be", "am", "is"]}
 ];
+
+let countQuiz = 0;
 
 function embaralhar(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -40,25 +43,26 @@ function enviarResposta(resposta){
         respostas.acertos.push(ordemQuizzes[countQuiz]);
     } else {
         respostas.erros.push(ordemQuizzes[countQuiz]);
+        respostas.opcaoErrada.push(".quizResposta").innerHTML;
     }
 
     if (countQuiz < questoes.length-1){
         countQuiz++;
         carregarQuiz(countQuiz);
     } else {
-        window.location.href = "TelaResultado.html";
+        window.location.href = `TelaResultado.html?acertos=${respostas.acertos.join(",")}&erros=${respostas.erros.join(",")}&opcaoErrada=${respostas.opcaoErrada.join(",")}`;
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const tooltip = document.getElementById("tooltip");
     const words = document.querySelectorAll(".word");
-    const respostas = document.querySelectorAll(".quizResposta");
+    const respostasQuiz = document.querySelectorAll(".quizResposta");
 
     // WORDS (click tooltip)
     words.forEach(word => {
         word.addEventListener("click", (e) => {
-            const rect = resposta.getBoundingClientRect();
+            const rect = word.getBoundingClientRect();
 
             tooltip.classList.add("show");
 
@@ -91,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // RESPOSTAS
-    respostas.forEach(resposta => {
+    respostasQuiz.forEach(resposta => {
         // Hover: Show tooltip
         resposta.addEventListener("mouseenter", () => {
             const rect = resposta.getBoundingClientRect();
@@ -127,12 +131,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const boxes = document.querySelectorAll(".quizBox");
     boxes.forEach(box => {
         box.addEventListener("click", () => {
-            const resposta = box.querySelector(".quizResposta").innerHTML;
+            const respostaQuiz = box.querySelector(".quizResposta").innerHTML;
             box.classList.add("clicado");
             setTimeout(() => {
                 box.classList.remove("clicado");
-                enviarResposta(resposta.innerHTML);
+                enviarResposta(respostaQuiz);
             }, 200);
         });
+    });
+
+    const listaAcertos = document.getElementById("listaAcertos");
+    const listaErros = document.getElementById("listaErros");
+
+    acertos.forEach(indice => {
+        const pergunta = document.createElement("p");
+        const resposta = document.createElement("p");
+        pergunta.style.fontFamily = "Inter Bold"
+        pergunta.innerHTML = `${questoes[indice].pergunta.slice(21)}`;
+        resposta.innerHTML = `Opção escolhida: ${questoes[indice].respostas[0]}`;
+        listaAcertos.appendChild(pergunta);
+        listaAcertos.appendChild(resposta);
+    });
+
+    erros.forEach(indice => {
+        const pergunta = document.createElement("p");
+        const respostaEscolhida = document.createElement("p");
+        const respostaCorreta = document.createElement("p");
+        pergunta.style.fontFamily = "Inter Bold"
+        pergunta.innerHTML = `${questoes[indice].pergunta.slice(21)}`;
+        respostaCorreta.innerHTML = `Opção escolhida: ${questoes[indice].respostas[0]}`;
+        listaErros.appendChild(pergunta);
+        // listaErros.appendChild(respostaEscolhida);
+        listaErros.appendChild(respostaCorreta);
     });
 });
