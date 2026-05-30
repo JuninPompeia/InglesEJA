@@ -1,3 +1,60 @@
+const traducao = [
+    { "palavra": "verb", "ptbr": "Verbo" },
+    { "palavra": "to be", "ptbr": "Ser / Estar" },
+    { "palavra": "i", "ptbr": "Eu" },
+    { "palavra": "you", "ptbr": "Você" },
+    { "palavra": "he", "ptbr": "Ele" },
+    { "palavra": "she", "ptbr": "Ela" },
+    { "palavra": "it", "ptbr": "Ele / Ela (objetos, animais)" },
+    { "palavra": "we", "ptbr": "Nós" },
+    { "palavra": "they", "ptbr": "Eles / Elas" },
+    { "palavra": "be", "ptbr": "Ser / Estar"},
+
+    { "palavra": "am", "ptbr": "Sou / Estou" },
+    { "palavra": "is", "ptbr": "É / Está" },
+    { "palavra": "are", "ptbr": "São / Estão" },
+    { "palavra": "not", "ptbr": "Não" },
+
+    { "palavra": "i'm", "ptbr": "Eu Sou / Eu Estou" },
+    { "palavra": "he's", "ptbr": "Ele É / Ele Está" },
+    { "palavra": "she's", "ptbr": "Ela É / Ela Está" },
+    { "palavra": "they're", "ptbr": "Eles São / Eles Estão" },
+    { "palavra": "isn't", "ptbr": "Não É / Não Está" },
+    { "palavra": "aren't", "ptbr": "Não São / Não Estão" },
+
+    { "palavra": "happy", "ptbr": "Feliz" },
+    { "palavra": "tired", "ptbr": "Cansado" },
+    { "palavra": "beautiful", "ptbr": "Bonito / Bonita" },
+    { "palavra": "intelligent", "ptbr": "Inteligente" },
+    { "palavra": "friend", "ptbr": "Amigo / Amiga" },
+    { "palavra": "students", "ptbr": "Estudantes" },
+    { "palavra": "busy", "ptbr": "Ocupado" },
+    { "palavra": "ready", "ptbr": "Pronto" },
+    { "palavra": "late", "ptbr": "Atrasado" },
+    { "palavra": "hungry", "ptbr": "Com Fome" },
+    { "palavra": "smart", "ptbr": "Esperto / Inteligente" },
+    { "palavra": "sad", "ptbr": "Triste" },
+    { "palavra": "angry", "ptbr": "Bravo / Irritado" },
+    { "palavra": "okay", "ptbr": "Bem / Tudo bem" },
+    { "palavra": "tall", "ptbr": "Alto" },
+    { "palavra": "home", "ptbr": "Casa" },
+    { "palavra": "school", "ptbr": "Escola" },
+    { "palavra": "today", "ptbr": "Hoje" },
+    { "palavra": "very", "ptbr": "Muito" },
+    { "palavra": "cold", "ptbr": "Frio" },
+    { "palavra": "hot", "ptbr": "Quente" },
+    { "palavra": "teacher", "ptbr": "Professor / Professora" },
+    { "palavra": "doctor", "ptbr": "Médico / Médica" },
+
+
+    { "palavra": "i ___ a student.", "ptbr": "Eu ___ um estudante." },
+    { "palavra": "she ___ my friend.", "ptbr": "Ela ___ minha amiga." },
+    { "palavra": "they ___ at school.", "ptbr": "Eles ___ na escola." },
+    { "palavra": "he ___ very happy.", "ptbr": "Ele ___ muito feliz." },
+    { "palavra": "we ___ from brazil.", "ptbr": "Nós ___ do Brasil." },
+    { "palavra": "you ___ a good teacher.", "ptbr": "Você ___ um bom professor." }
+];
+
 let respostas = {
     acertos: [],
     erros: [],
@@ -5,12 +62,12 @@ let respostas = {
 };
 
 let questoes = [
-    {"pergunta":"Complete a frase:<br> I ___ a student.", "respostas":["am", "is", "are", "be"]},
-    {"pergunta":"Complete a frase:<br> She ___ my friend.", "respostas":["is", "am", "are", "be"]},
-    {"pergunta":"Complete a frase:<br> They ___ at school.", "respostas":["are", "be", "is", "am"]},
-    {"pergunta":"Complete a frase:<br> He ___ very happy.", "respostas":["is", "are", "be", "am"]},
-    {"pergunta":"Complete a frase:<br> We ___ from Brazil.", "respostas":["are", "is", "am", "be"]},
-    {"pergunta":"Complete a frase:<br> You ___ a good teacher.", "respostas":["are", "be", "am", "is"]}
+    { "pergunta": "Complete a frase:<br> <span class='word'>I ___ a student.</span>", "respostas": ["am", "is", "are", "be"] },
+    { "pergunta": "Complete a frase:<br> <span class='word'>She ___ my friend.</span>", "respostas": ["is", "am", "are", "be"] },
+    { "pergunta": "Complete a frase:<br> <span class='word'>They ___ at school.</span>", "respostas": ["are", "be", "is", "am"] },
+    { "pergunta": "Complete a frase:<br> <span class='word'>He ___ very happy.</span>", "respostas": ["is", "are", "be", "am"] },
+    { "pergunta": "Complete a frase:<br> <span class='word'>We ___ from Brazil.</span>", "respostas": ["are", "is", "am", "be"] },
+    { "pergunta": "Complete a frase:<br> <span class='word'>You ___ a good teacher.</span>", "respostas": ["are", "be", "am", "is"] }
 ];
 
 let countQuiz = 0;
@@ -29,24 +86,24 @@ let ordemQuizzes = embaralhar(indicesQuizzes);
 function carregarQuiz(countQuiz) {
     let ordemRespostas = embaralhar([0, 1, 2, 3]);
 
-    document.getElementById("contador").innerHTML = `${countQuiz+1} / ${questoes.length}`;
+    document.getElementById("contador").innerHTML = `${countQuiz + 1} / ${questoes.length}`;
 
-    for (let i = 0; i < 4; i++){
-        document.getElementById(`resposta${i+1}`).innerHTML = questoes[ordemQuizzes[countQuiz]].respostas[ordemRespostas[i]];
+    for (let i = 0; i < 4; i++) {
+        document.getElementById(`resposta${i + 1}`).innerHTML = questoes[ordemQuizzes[countQuiz]].respostas[ordemRespostas[i]];
     }
 
     document.getElementById("pergunta").innerHTML = questoes[ordemQuizzes[countQuiz]].pergunta;
 }
 
-function enviarResposta(resposta){
-    if (resposta == questoes[ordemQuizzes[countQuiz]].respostas[0]){
+function enviarResposta(resposta) {
+    if (resposta == questoes[ordemQuizzes[countQuiz]].respostas[0]) {
         respostas.acertos.push(ordemQuizzes[countQuiz]);
     } else {
         respostas.erros.push(ordemQuizzes[countQuiz]);
         respostas.opcaoErrada.push(".quizResposta").innerHTML;
     }
 
-    if (countQuiz < questoes.length-1){
+    if (countQuiz < questoes.length - 1) {
         countQuiz++;
         carregarQuiz(countQuiz);
     } else {
@@ -63,6 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
     words.forEach(word => {
         word.addEventListener("click", (e) => {
             const rect = word.getBoundingClientRect();
+            const traduzido = traducao.find(obj => obj.palavra === word.innerHTML.toLowerCase());
+
+            if (traduzido) {
+                tooltip.innerHTML = traduzido.ptbr;
+            } else {
+                tooltip.innerHTML = "Tradução inexistente";
+            }
 
             tooltip.classList.add("show");
 
@@ -77,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let top = rect.bottom + 8;
 
-            
+
             if (top + tooltipHeight > window.innerHeight) {
                 top = rect.top - tooltipHeight - 8;
             }
@@ -99,6 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Hover: Show tooltip
         resposta.addEventListener("mouseenter", () => {
             const rect = resposta.getBoundingClientRect();
+            const traduzido = traducao.find(obj => obj.palavra === resposta.innerHTML.toLowerCase());
+
+            if (traduzido) {
+                tooltip.innerHTML = traduzido.ptbr;
+            } else {
+                tooltip.innerHTML = "Tradução inexistente";
+            }
 
             tooltip.classList.add("show");
 
@@ -113,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let top = rect.bottom + 8;
 
-            
+
             if (top + tooltipHeight > window.innerHeight) {
                 top = rect.top - tooltipHeight - 8;
             }
