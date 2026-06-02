@@ -186,6 +186,7 @@ th, td {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    text-align: center;
 }
 .word {
     cursor: pointer;
